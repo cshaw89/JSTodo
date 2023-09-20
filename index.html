@@ -5,6 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>TodoTracker</title>
+  <style>  
+  body {
+    padding: 15px; 
+    background-color: #66CCFF;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  }
+  </style>
 </head>
 <body>
   <h1 id="title">Todo Tracker</h1>
@@ -27,8 +34,8 @@
     var todoList = document.querySelector('ul');
     var button = document.querySelector('button');
     var input = document.getElementById('user-todo');
-    var todosArray = [];
-
+   // var todosArray = [];
+    var todosArray = localStorage.getItem('todos') ? JSON.parse(localStorage.getItem('todos')) : []; 
 
     
 
@@ -58,9 +65,15 @@
         localStorage.setItem('todos', JSON.stringify(todosArray));
     }
 
+    for (var i = 0; i < storage.legth; i++) {
+        todoMaker(storage[i]);
+    }
+
     button.addEventListener('click', function(){
        while (todoList.firstChild ) {
         todoList.removeChild(todoList.firstChild);
+        localStorage.clear(); 
+
        }
         
     }
