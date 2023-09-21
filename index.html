@@ -5,6 +5,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>TodoTracker</title>
+  <style>  
+  body {
+    padding: 15px; 
+    background-color: #66CCFF;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  }
+    #title {
+      padding: 10px;
+      font-size: 36;
+      border: 2px solid #fff;
+      width: 250px; 
+    }
+    #todo-header {
+      padding: 10px;
+      background-color: aquamarine; 
+    }
+    ul {
+      list-style: none;
+      padding-left: 0;
+      width: 250px;
+    }
+    li {
+      color: #222; 
+      background-color: rgba(255,255,255, .5);
+      list-style: none;
+    }
+  
+  </style>
 </head>
 <body>
   <h1 id="title">Todo Tracker</h1>
@@ -13,7 +41,7 @@
     <input type="text" id="user-todo" placeholder="New Todo" required>
   </form>
 
-  <h2 id="todo-header">Todos</h2>
+  <h2 id="todo-header">Todo List</h2>
   <ul>
 
   </ul>
@@ -27,8 +55,8 @@
     var todoList = document.querySelector('ul');
     var button = document.querySelector('button');
     var input = document.getElementById('user-todo');
-    var todosArray = [];
-
+   // var todosArray = [];
+    var todosArray = localStorage.getItem('todos') ? JSON.parse(localStorage.getItem('todos')) : []; 
 
     
 
@@ -58,9 +86,15 @@
         localStorage.setItem('todos', JSON.stringify(todosArray));
     }
 
+    for (var i = 0; i < storage.lengfth; i++) {
+        todoMaker(storage[i]);
+    }
+
     button.addEventListener('click', function(){
        while (todoList.firstChild ) {
         todoList.removeChild(todoList.firstChild);
+        localStorage.clear(); 
+
        }
         
     }
